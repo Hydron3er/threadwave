@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Noir Threads</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     * {
       box-sizing: border-box;
@@ -65,7 +65,7 @@
     .products {
       display: flex;
       flex-direction: column;
-      gap: 6rem; /* increased vertical gap */
+      gap: 7rem; /* increased vertical gap */
       padding: 4rem 2rem;
     }
 
@@ -73,9 +73,10 @@
       display: flex;
       flex-direction: row;
       align-items: center;
-      gap: 3rem;
+      gap: 3rem; /* horizontal gap */
     }
 
+    /* Reverse direction on even items */
     .product:nth-child(even) {
       flex-direction: row-reverse;
     }
@@ -89,6 +90,17 @@
 
     .product-description {
       max-width: 650px;
+      padding: 1.5rem;
+      border-radius: 8px;
+    }
+
+    /* Middle product text with overlapping black transparent background */
+    .product:nth-child(2) .product-description {
+      background: rgba(0, 0, 0, 0.75);
+      color: #eee;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
     }
 
     .product-description h3 {
@@ -100,11 +112,11 @@
 
     .product-description p {
       font-size: 1.3rem;
-      color: #444;
       line-height: 1.8;
       font-style: italic;
       letter-spacing: 0.02em;
       user-select: none;
+      margin: 0;
     }
 
     footer {
@@ -112,7 +124,7 @@
       padding: 2rem;
       background: #000;
       color: white;
-      margin-top: 4rem;
+      margin-top: 5rem;
       font-size: 1rem;
       letter-spacing: 0.05em;
     }
@@ -125,6 +137,26 @@
 
     a:hover {
       color: #fff;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 700px) {
+      .product {
+        flex-direction: column !important;
+        gap: 2.5rem;
+      }
+      .product:nth-child(even) {
+        flex-direction: column !important;
+      }
+      .product img {
+        max-width: 100%;
+      }
+      .product-description {
+        padding: 1rem;
+      }
+      .product:nth-child(2) .product-description {
+        background: rgba(0, 0, 0, 0.9);
+      }
     }
   </style>
 </head>
