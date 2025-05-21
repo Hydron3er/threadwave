@@ -25,6 +25,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     header h1 {
@@ -74,6 +77,8 @@
       flex-direction: row;
       align-items: center;
       gap: 3rem; /* horizontal gap */
+      position: relative;
+      z-index: 1;
     }
 
     /* Reverse direction on even items */
@@ -92,15 +97,8 @@
       max-width: 650px;
       padding: 1.5rem;
       border-radius: 8px;
-    }
-
-    /* Middle product text with overlapping black transparent background */
-    .product:nth-child(2) .product-description {
-      background: rgba(0, 0, 0, 0.75);
-      color: #eee;
       position: relative;
-      z-index: 1;
-      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+      z-index: 2;
     }
 
     .product-description h3 {
@@ -117,6 +115,7 @@
       letter-spacing: 0.02em;
       user-select: none;
       margin: 0;
+      color: inherit; /* will adapt */
     }
 
     footer {
@@ -139,7 +138,49 @@
       color: #fff;
     }
 
-    /* Responsive adjustments */
+    /* === NEW: Full width black background container for middle product === */
+    .middle-product-wrapper {
+      position: relative;
+      width: 100vw; /* full viewport width */
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      padding: 4rem 0; /* vertical padding */
+      overflow: visible;
+      z-index: 0;
+    }
+
+    /* The fading black overlay that we will animate */
+    .middle-product-bg {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: black;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease-out;
+      z-index: 1;
+    }
+
+    /* We will toggle this class to fade black in */
+    .middle-product-bg.visible {
+      opacity: 1;
+    }
+
+    /* Adjust the .product inside the wrapper to have relative position and higher z-index */
+    .middle-product-wrapper .product {
+      position: relative;
+      z-index: 2;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    /* When black background is visible, text becomes light */
+    .middle-product-bg.visible ~ .product .product-description {
+      color: #eee;
+    }
+
+    /* Responsive */
     @media (max-width: 700px) {
       .product {
         flex-direction: column !important;
@@ -154,8 +195,10 @@
       .product-description {
         padding: 1rem;
       }
-      .product:nth-child(2) .product-description {
-        background: rgba(0, 0, 0, 0.9);
+      .middle-product-wrapper {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
       }
     }
   </style>
@@ -184,11 +227,16 @@
       </div>
     </div>
 
-    <div class="product">
-      <img src="https://images.unsplash.com/photo-1618354691373-247c6f9d302b?grayscale" alt="Ink Silhouette Tee" />
-      <div class="product-description">
-        <h3>Ink Silhouette Tee</h3>
-        <p>Darkness and light merge at the edges, a fleeting glimpse between form and void.</p>
+    <!-- Middle product wrapper with black fade background -->
+    <div class="middle-product-wrapper" id="middle-product-wrapper">
+      <div class="middle-product-bg" id="middle-product-bg"></div>
+
+      <div class="product">
+        <img src="https://images.unsplash.com/photo-1618354691373-247c6f9d302b?grayscale" alt="Ink Silhouette Tee" />
+        <div class="product-description">
+          <h3>Ink Silhouette Tee</h3>
+          <p>Darkness and light merge at the edges, a fleeting glimpse between form and void.</p>
+        </div>
       </div>
     </div>
 
@@ -205,5 +253,35 @@
     <p>Email us at <a href="mailto:contact@noirthreads.com">contact@noirthreads.com</a></p>
     <p>&copy; 2025 Noir Threads. All rights reserved.</p>
   </footer>
+
+  <script>
+    // Fade black background in as user scrolls through the middle product section
+    const wrapper = document.getElementById('middle-product-wrapper');
+    const bg = document.getElementById('middle-product-bg');
+
+    function handleScroll() {
+      const rect = wrapper.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+
+      // Calculate how far the middle product is visible in viewport (0 to 1)
+      const visibleRatio = Math.min(Math.max((windowHeight - rect.top) / (rect.height + windowHeight), 0), 1);
+
+      // Fade in opacity based on visible ratio, can adjust multiplier/smoothness here
+      bg.style.opacity = visibleRatio;
+
+      // Optionally add a class if visibleRatio > 0 for CSS styling
+      if (visibleRatio > 0) {
+        bg.classList.add('visible');
+      } else {
+        bg.classList.remove('visible');
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+
+    // Initial call to set opacity on load
+    handleScroll();
+  </script>
 </body>
 </html>
