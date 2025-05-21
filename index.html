@@ -7,28 +7,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
       font-family: 'Inter', sans-serif;
     }
 
     body {
       background: #fff;
       color: #111;
-      overflow-x: hidden;
+      transition: background-color 0.4s ease, color 0.4s ease;
     }
 
     header {
       background: #000;
       color: #fff;
       padding: 1.5rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       position: sticky;
       top: 0;
       z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     header h1 {
@@ -43,34 +43,34 @@
       font-size: 1.1rem;
     }
 
-    .section {
+    section {
       min-height: 100vh;
+      padding: 6rem 2rem;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
-      padding: 5rem 2rem;
-      transition: background-color 0.4s ease, color 0.4s ease;
+      transition: background-color 1s ease, color 1s ease;
     }
 
-    .section h2 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-
-    .section p {
-      max-width: 700px;
-      font-size: 1.5rem;
-      text-align: center;
-      line-height: 2;
-    }
-
-    .product-img {
+    section img {
       width: 300px;
-      height: auto;
+      max-width: 90%;
       border-radius: 8px;
       margin: 2rem 0;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    section p {
+      font-size: 1.3rem;
+      max-width: 600px;
+      text-align: center;
+      line-height: 1.8;
     }
 
     footer {
@@ -78,20 +78,25 @@
       padding: 2rem;
       background: #000;
       color: white;
-      font-size: 1rem;
+    }
+
+    /* Fade themes */
+    .section-light {
+      background-color: #fff;
+      color: #111;
+    }
+
+    .section-dark {
+      background-color: #111;
+      color: #eee;
     }
 
     @media (max-width: 700px) {
-      .section h2 {
-        font-size: 2.2rem;
+      section h2 {
+        font-size: 2rem;
       }
-
-      .section p {
-        font-size: 1.2rem;
-      }
-
-      .product-img {
-        width: 90%;
+      section p {
+        font-size: 1.1rem;
       }
     }
   </style>
@@ -101,29 +106,29 @@
     <h1>Noir Threads</h1>
     <nav>
       <a href="#">Home</a>
-      <a href="#collection">Collection</a>
+      <a href="#section2">Collection</a>
     </nav>
   </header>
 
   <!-- Section 1 -->
-  <section class="section" id="section1">
-    <h2>Wear the Art of Shadows</h2>
-    <img class="product-img" src="https://images.unsplash.com/photo-1585386959984-a41552262bc4?grayscale" alt="Product 1">
-    <p>Contours dissolve in silent spaces, hinting at forms half-remembered.</p>
+  <section class="section-light" id="section1">
+    <h2>Abstract Vision Tee</h2>
+    <img src="https://images.unsplash.com/photo-1585386959984-a41552262bc4?grayscale" alt="Abstract Vision Tee" />
+    <p>Contours dissolve in silent spaces, hinting at forms half-remembered in a dream’s embrace.</p>
   </section>
 
   <!-- Section 2 -->
-  <section class="section" id="section2">
-    <h2>Ink Silhouette</h2>
-    <img class="product-img" src="https://images.unsplash.com/photo-1618354691373-247c6f9d302b?grayscale" alt="Product 2">
-    <p>Darkness and light merge at the edges, in delicate contradiction.</p>
+  <section class="section-light" id="section2">
+    <h2>Ink Silhouette Tee</h2>
+    <img src="https://images.unsplash.com/photo-1618354691373-247c6f9d302b?grayscale" alt="Ink Silhouette Tee" />
+    <p>Darkness and light merge at the edges, a fleeting glimpse between form and void.</p>
   </section>
 
   <!-- Section 3 -->
-  <section class="section" id="section3">
+  <section class="section-light" id="section3">
     <h2>Noir Line Tee</h2>
-    <img class="product-img" src="https://images.unsplash.com/photo-1600180758890-6f02c3c9e1f7?grayscale" alt="Product 3">
-    <p>Lines trace quiet paths through memory’s haze—minimal and intentional.</p>
+    <img src="https://images.unsplash.com/photo-1600180758890-6f02c3c9e1f7?grayscale" alt="Noir Line Tee" />
+    <p>Lines trace silent paths through shadowed realms, echoing thoughts left unspoken.</p>
   </section>
 
   <footer>
@@ -131,40 +136,38 @@
   </footer>
 
   <script>
-    const sections = document.querySelectorAll('.section');
+    const sections = document.querySelectorAll("section");
 
-    function mapRange(value, inMin, inMax, outMin, outMax) {
-      return ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
-    }
+    function updateSectionColors() {
+      const windowHeight = window.innerHeight;
+      let closestSection = null;
+      let minDistance = Infinity;
 
-    function handleFadeScroll() {
-      const scrollY = window.scrollY;
-      const windowH = window.innerHeight;
-
-      sections.forEach((section, index) => {
+      sections.forEach((section) => {
         const rect = section.getBoundingClientRect();
-        const top = rect.top + scrollY;
+        const sectionCenter = rect.top + rect.height / 2;
+        const distanceToCenter = Math.abs(windowHeight / 2 - sectionCenter);
 
-        const sectionProgress = mapRange(
-          scrollY,
-          top - windowH,
-          top + windowH,
-          0,
-          1
-        );
+        if (distanceToCenter < minDistance) {
+          minDistance = distanceToCenter;
+          closestSection = section;
+        }
+      });
 
-        const clamped = Math.max(0, Math.min(sectionProgress, 1));
-        const bgShade = Math.floor(255 - clamped * 155); // 255 → 100
-        const textShade = Math.floor(17 + clamped * 220); // 17 → 237
-
-        section.style.backgroundColor = `rgb(${bgShade}, ${bgShade}, ${bgShade})`;
-        section.style.color = `rgb(${textShade}, ${textShade}, ${textShade})`;
+      sections.forEach((section) => {
+        if (section === closestSection) {
+          section.classList.add("section-dark");
+          section.classList.remove("section-light");
+        } else {
+          section.classList.add("section-light");
+          section.classList.remove("section-dark");
+        }
       });
     }
 
-    window.addEventListener('scroll', handleFadeScroll);
-    window.addEventListener('resize', handleFadeScroll);
-    window.addEventListener('load', handleFadeScroll);
+    window.addEventListener("scroll", updateSectionColors);
+    window.addEventListener("resize", updateSectionColors);
+    window.addEventListener("load", updateSectionColors);
   </script>
 </body>
 </html>
