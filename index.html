@@ -28,7 +28,7 @@
     }
 
     header h1 {
-      font-size: 1.8rem;
+      font-size: 2rem;
     }
 
     nav a {
@@ -36,6 +36,7 @@
       margin-left: 1.5rem;
       text-decoration: none;
       font-weight: 600;
+      font-size: 1.1rem;
     }
 
     .hero {
@@ -46,21 +47,25 @@
     }
 
     .hero h2 {
-      font-size: 3rem;
+      font-size: 3.5rem;
       margin-bottom: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
     }
 
     .hero p {
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       max-width: 600px;
       margin: auto;
       color: #ccc;
+      font-style: italic;
+      line-height: 1.6;
     }
 
     .products {
       display: flex;
       flex-direction: column;
-      gap: 4rem;
+      gap: 6rem; /* increased vertical gap */
       padding: 4rem 2rem;
     }
 
@@ -68,7 +73,7 @@
       display: flex;
       flex-direction: row;
       align-items: center;
-      gap: 2rem;
+      gap: 3rem;
     }
 
     .product:nth-child(even) {
@@ -76,24 +81,30 @@
     }
 
     .product img {
-      max-width: 300px;
+      max-width: 320px;
       border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+      flex-shrink: 0;
     }
 
     .product-description {
-      max-width: 600px;
+      max-width: 650px;
     }
 
     .product-description h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
     }
 
     .product-description p {
-      font-size: 1rem;
-      color: #333;
-      line-height: 1.5;
+      font-size: 1.3rem;
+      color: #444;
+      line-height: 1.8;
+      font-style: italic;
+      letter-spacing: 0.02em;
+      user-select: none;
     }
 
     footer {
@@ -101,11 +112,19 @@
       padding: 2rem;
       background: #000;
       color: white;
-      margin-top: 3rem;
+      margin-top: 4rem;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
     }
 
     a {
-      color: #ccc;
+      color: #bbb;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #fff;
     }
   </style>
 </head>
@@ -121,7 +140,7 @@
 
   <section class="hero">
     <h2>Wear the Art of Shadows</h2>
-    <p>Monochrome apparel designed with edge, purpose, and soul. A tribute to the depth in simplicity.</p>
+    <p>Monochrome forms whispering untold stories, where light fades into the edge of meaning.</p>
   </section>
 
   <section id="products" class="products">
@@ -129,7 +148,7 @@
       <img src="https://images.unsplash.com/photo-1585386959984-a41552262bc4?grayscale" alt="Abstract Vision Tee" />
       <div class="product-description">
         <h3>Abstract Vision Tee</h3>
-        <p>A minimalist composition of fragmented forms — this piece invites the viewer to interpret the shadowy balance between chaos and clarity.</p>
+        <p>Contours dissolve in silent spaces, hinting at shapes half-remembered in a dream's embrace.</p>
       </div>
     </div>
 
@@ -137,7 +156,7 @@
       <img src="https://images.unsplash.com/photo-1618354691373-247c6f9d302b?grayscale" alt="Ink Silhouette Tee" />
       <div class="product-description">
         <h3>Ink Silhouette Tee</h3>
-        <p>Designed with stark contrasts and inky contours, this shirt speaks to presence and absence — the power of the seen and unseen.</p>
+        <p>Darkness and light merge at the edges, a fleeting glimpse between form and void.</p>
       </div>
     </div>
 
@@ -145,7 +164,7 @@
       <img src="https://images.unsplash.com/photo-1600180758890-6f02c3c9e1f7?grayscale" alt="Noir Line Tee" />
       <div class="product-description">
         <h3>Noir Line Tee</h3>
-        <p>A statement in linear flow and boundary. This design reflects the edges of emotion and the precision of identity in black and white.</p>
+        <p>Lines trace silent paths through shadowed realms, echoing thoughts left unspoken.</p>
       </div>
     </div>
   </section>
