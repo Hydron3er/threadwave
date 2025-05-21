@@ -43,104 +43,34 @@
       font-size: 1.1rem;
     }
 
-    .hero {
-      padding: 5rem 2rem;
-      text-align: center;
-      background: #111;
-      color: #fff;
+    .section {
       min-height: 100vh;
       display: flex;
+      align-items: center;
+      justify-content: center;
       flex-direction: column;
-      justify-content: center;
+      padding: 5rem 2rem;
+      transition: background-color 0.4s ease, color 0.4s ease;
     }
 
-    .hero h2 {
-      font-size: 3.5rem;
+    .section h2 {
+      font-size: 3rem;
       margin-bottom: 1rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
+      text-align: center;
     }
 
-    .hero p {
+    .section p {
+      max-width: 700px;
       font-size: 1.5rem;
-      max-width: 600px;
-      margin: auto;
-      color: #ccc;
-      font-style: italic;
-      line-height: 1.6;
+      text-align: center;
+      line-height: 2;
     }
 
-    .product-section {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 4rem 2rem;
-    }
-
-    .product {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 3rem;
-      max-width: 1000px;
-      width: 100%;
-    }
-
-    .product:nth-child(even) {
-      flex-direction: row-reverse;
-    }
-
-    .product img {
-      max-width: 320px;
+    .product-img {
+      width: 300px;
+      height: auto;
       border-radius: 8px;
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
-      flex-shrink: 0;
-    }
-
-    .product-description {
-      max-width: 600px;
-    }
-
-    .product-description h3 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      font-weight: 700;
-    }
-
-    .product-description p {
-      font-size: 1.3rem;
-      line-height: 1.8;
-      font-style: italic;
-      color: inherit;
-    }
-
-    /* Middle black fade section */
-    .middle-wrapper {
-      position: relative;
-      width: 100vw;
-      margin-left: calc(-50vw + 50%);
-      background-color: black;
-      color: white;
-    }
-
-    .middle-bg {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: black;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: 1;
-    }
-
-    .middle-bg.visible {
-      opacity: 1;
-    }
-
-    .middle-wrapper .product-section {
-      position: relative;
-      z-index: 2;
-      color: white;
+      margin: 2rem 0;
     }
 
     footer {
@@ -152,11 +82,16 @@
     }
 
     @media (max-width: 700px) {
-      .product {
-        flex-direction: column !important;
+      .section h2 {
+        font-size: 2.2rem;
       }
-      .product img {
-        max-width: 100%;
+
+      .section p {
+        font-size: 1.2rem;
+      }
+
+      .product-img {
+        width: 90%;
       }
     }
   </style>
@@ -166,49 +101,29 @@
     <h1>Noir Threads</h1>
     <nav>
       <a href="#">Home</a>
-      <a href="#products">Collection</a>
+      <a href="#collection">Collection</a>
     </nav>
   </header>
 
-  <section class="hero">
+  <!-- Section 1 -->
+  <section class="section" id="section1">
     <h2>Wear the Art of Shadows</h2>
-    <p>Monochrome forms whispering untold stories, where light fades into the edge of meaning.</p>
+    <img class="product-img" src="https://images.unsplash.com/photo-1585386959984-a41552262bc4?grayscale" alt="Product 1">
+    <p>Contours dissolve in silent spaces, hinting at forms half-remembered.</p>
   </section>
 
-  <!-- Product 1 -->
-  <section class="product-section">
-    <div class="product">
-      <img src="https://images.unsplash.com/photo-1585386959984-a41552262bc4?grayscale" alt="Abstract Vision Tee" />
-      <div class="product-description">
-        <h3>Abstract Vision Tee</h3>
-        <p>Contours dissolve in silent spaces, hinting at shapes half-remembered in a dream's embrace.</p>
-      </div>
-    </div>
+  <!-- Section 2 -->
+  <section class="section" id="section2">
+    <h2>Ink Silhouette</h2>
+    <img class="product-img" src="https://images.unsplash.com/photo-1618354691373-247c6f9d302b?grayscale" alt="Product 2">
+    <p>Darkness and light merge at the edges, in delicate contradiction.</p>
   </section>
 
-  <!-- Middle product with black background and fade -->
-  <div class="middle-wrapper" id="middle-wrapper">
-    <div class="middle-bg" id="middle-bg"></div>
-    <section class="product-section">
-      <div class="product">
-        <img src="https://images.unsplash.com/photo-1618354691373-247c6f9d302b?grayscale" alt="Ink Silhouette Tee" />
-        <div class="product-description">
-          <h3>Ink Silhouette Tee</h3>
-          <p>Darkness and light merge at the edges, a fleeting glimpse between form and void.</p>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- Product 3 -->
-  <section class="product-section">
-    <div class="product">
-      <img src="https://images.unsplash.com/photo-1600180758890-6f02c3c9e1f7?grayscale" alt="Noir Line Tee" />
-      <div class="product-description">
-        <h3>Noir Line Tee</h3>
-        <p>Lines trace silent paths through shadowed realms, echoing thoughts left unspoken.</p>
-      </div>
-    </div>
+  <!-- Section 3 -->
+  <section class="section" id="section3">
+    <h2>Noir Line Tee</h2>
+    <img class="product-img" src="https://images.unsplash.com/photo-1600180758890-6f02c3c9e1f7?grayscale" alt="Product 3">
+    <p>Lines trace quiet paths through memory’s haze—minimal and intentional.</p>
   </section>
 
   <footer>
@@ -216,19 +131,40 @@
   </footer>
 
   <script>
-    const wrapper = document.getElementById('middle-wrapper');
-    const bg = document.getElementById('middle-bg');
+    const sections = document.querySelectorAll('.section');
 
-    function handleScroll() {
-      const rect = wrapper.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const visibleRatio = Math.min(Math.max((windowHeight - rect.top) / (rect.height + windowHeight), 0), 1);
-      bg.style.opacity = visibleRatio;
+    function mapRange(value, inMin, inMax, outMin, outMax) {
+      return ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
     }
 
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleScroll);
-    handleScroll();
+    function handleFadeScroll() {
+      const scrollY = window.scrollY;
+      const windowH = window.innerHeight;
+
+      sections.forEach((section, index) => {
+        const rect = section.getBoundingClientRect();
+        const top = rect.top + scrollY;
+
+        const sectionProgress = mapRange(
+          scrollY,
+          top - windowH,
+          top + windowH,
+          0,
+          1
+        );
+
+        const clamped = Math.max(0, Math.min(sectionProgress, 1));
+        const bgShade = Math.floor(255 - clamped * 155); // 255 → 100
+        const textShade = Math.floor(17 + clamped * 220); // 17 → 237
+
+        section.style.backgroundColor = `rgb(${bgShade}, ${bgShade}, ${bgShade})`;
+        section.style.color = `rgb(${textShade}, ${textShade}, ${textShade})`;
+      });
+    }
+
+    window.addEventListener('scroll', handleFadeScroll);
+    window.addEventListener('resize', handleFadeScroll);
+    window.addEventListener('load', handleFadeScroll);
   </script>
 </body>
 </html>
